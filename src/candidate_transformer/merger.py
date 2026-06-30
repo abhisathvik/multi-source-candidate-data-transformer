@@ -137,6 +137,37 @@ def _union_all(union_find: UnionFind, indices: list[int]) -> None:
         union_find.union(first, index)
 
 
+def _compute_name_similarity(r1: SourceRecord, r2: SourceRecord) -> float:
+    names1 = _record_names(r1)
+    names2 = _record_names(r2)
+    if not names1 or not names2:
+        return 0.5
+
+    best_ratio = 0.0
+    for n1 in names1:
+        for n2 in names2:
+            n1_clean = n1.lower().strip()
+            n2_clean = n2.lower().strip()
+            ratio = SequenceMatcher(None, n1_clean, n2_clean).ratio()
+
+            # Check if first names are compatible (e.g. Jon vs Jonathan)
+            n1_parts = _name_parts(n1_clean)
+            n2_parts = _name_parts(n2_clean)
+            if n1_parts and n2_parts:
+                if _first_names_compatible(n1_parts[0], n2_parts[0]):
+                    if len(n1_parts) == 1 or len(n2_parts) == 1:
+                        # Nickname match boost
+                        ratio = max(ratio, 0.85)
+                    elif _last_names_compatible(n1_parts[-1], n2_parts[-1]):
+                        # Nickname with matching last name boost
+                        ratio = max(ratio, 0.95)
+
+            if ratio > best_ratio:
+                best_ratio = ratio
+
+    return best_ratio
+
+
 def _records_match(left: SourceRecord, right: SourceRecord) -> bool:
     left_email_key = email_identity_key(left.email)
     right_email_key = email_identity_key(right.email)
@@ -161,10 +192,7 @@ def _records_match(left: SourceRecord, right: SourceRecord) -> bool:
         signals["phone"] = 0.5
 
     # Name signal
-    if left.full_name and right.full_name:
-        signals["name"] = SequenceMatcher(None, left.full_name.lower(), right.full_name.lower()).ratio()
-    else:
-        signals["name"] = 0.5
+    signals["name"] = _compute_name_similarity(left, right)
 
     # Country signal
     if left.country and right.country:
@@ -216,6 +244,10 @@ def _record_names(record: SourceRecord) -> list[str]:
     names = []
     if record.full_name:
         names.append(record.full_name)
+    if record.aliases:
+        for alias in record.aliases:
+            if alias not in names:
+                names.append(alias)
     return names
 
 
@@ -502,11 +534,8 @@ def _compute_pairwise_signals(records: list[SourceRecord]) -> dict[str, float]:
                 counts["phone"] += 1
 
             # Name signal
-            if r1.full_name and r2.full_name:
-                n1 = r1.full_name.lower().strip()
-                n2 = r2.full_name.lower().strip()
-                ratio = SequenceMatcher(None, n1, n2).ratio()
-                signals["name"] += ratio
+            if _record_names(r1) or _record_names(r2):
+                signals["name"] += _compute_name_similarity(r1, r2)
                 counts["name"] += 1
 
             # Country signal

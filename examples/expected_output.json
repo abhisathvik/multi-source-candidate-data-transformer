@@ -1,45 +1,16 @@
 [
   {
-    "name": "Candidate Goes By Jon.",
-    "name_confidence": 0.78,
+    "name": "Jonathan Andrew Doe",
+    "name_confidence": 0.81,
     "name_provenance": [
-      "Notes:notes1.txt"
+      "ATS:sample_ats.json#1",
+      "Resume:resume1.txt"
     ],
-    "email": null,
-    "email_confidence": 0.0,
-    "email_provenance": [],
-    "phone": null,
-    "phone_confidence": 0.0,
-    "phone_provenance": [],
-    "country": "US",
-    "country_confidence": 0.78,
-    "country_provenance": [
-      "Notes:notes1.txt"
-    ],
-    "skills": [
-      "Data Science",
-      "PyTorch"
-    ],
-    "skills_confidence": 0.78,
-    "skills_provenance": [
-      "Notes:notes1.txt"
-    ],
-    "experience_yrs": 5.5,
-    "experience_yrs_confidence": 0.78,
-    "experience_yrs_provenance": [
-      "Notes:notes1.txt"
-    ]
-  },
-  {
-    "name": "Jonathan A. Doe Jr.",
-    "name_confidence": 0.68,
-    "name_provenance": [
-      "CSV:sample.csv#row1"
-    ],
-    "email": "john.doe@gmail.com",
-    "email_confidence": 0.72,
+    "email": "j.doe@gmail.com",
+    "email_confidence": 0.84,
     "email_provenance": [
-      "ATS:sample_ats.json#1"
+      "ATS:sample_ats.json#1",
+      "Resume:resume1.txt"
     ],
     "phone": "+16505551234",
     "phone_confidence": 0.94,
@@ -49,30 +20,31 @@
       "Resume:resume1.txt"
     ],
     "country": "US",
-    "country_confidence": 0.9,
+    "country_confidence": 0.86,
     "country_provenance": [
       "CSV:sample.csv#row1",
-      "ATS:sample_ats.json#1"
+      "Notes:notes1.txt"
     ],
     "skills": [
+      "Data Science",
       "Gen Ai",
-      "Generative Ai",
+      "Large Language Models",
       "Machine Learning",
       "Python",
       "PyTorch",
-      "SQL",
-      "Structured Query Language"
+      "SQL"
     ],
-    "skills_confidence": 0.94,
+    "skills_confidence": 0.96,
     "skills_provenance": [
       "ATS:sample_ats.json#1",
       "CSV:sample.csv#row1",
+      "Notes:notes1.txt",
       "Resume:resume1.txt"
     ],
-    "experience_yrs": 6.0,
-    "experience_yrs_confidence": 0.83,
+    "experience_yrs": 5.5,
+    "experience_yrs_confidence": 0.77,
     "experience_yrs_provenance": [
-      "ATS:sample_ats.json#1"
+      "Notes:notes1.txt"
     ]
   }
 ]

@@ -96,26 +96,17 @@ Located in California, USA.
         notes_paths=[notes_path],
     )
 
-    assert len(output) == 2
+    assert len(output) == 1
     c1 = output[0]
-    assert c1["name"] == "Candidate Goes By Jon."
-    assert c1["email"] is None
-    assert c1["phone"] is None
+    assert c1["name"] == "Jonathan A. Doe Jr."
+    assert c1["email"] == "j.doe@gmail.com"
+    assert "Resume:resume1.txt" in c1["email_provenance"]
+    assert "ATS:sample_ats.json#1" in c1["email_provenance"]
+    assert "CSV:sample.csv#row1" not in c1["email_provenance"]  # plus-addressing was normalized out of the selected email
+    assert c1["phone"] == "+16505551234"
     assert c1["country"] == "US"
-    assert c1["skills"] == ["Data Science", "PyTorch"]
-    assert c1["experience_yrs"] == 5.5
-    assert c1["name_confidence"] == 0.78
-    assert c1["name_provenance"] == ["Notes:notes1.txt"]
-
-    c2 = output[1]
-    assert c2["name"] == "Jonathan A. Doe Jr."
-    assert c2["email"] == "j.doe@gmail.com"
-    assert "Resume:resume1.txt" in c2["email_provenance"]
-    assert "ATS:sample_ats.json#1" in c2["email_provenance"]
-    assert "CSV:sample.csv#row1" not in c2["email_provenance"]  # plus-addressing was normalized out of the selected email
-    assert c2["phone"] == "+16505551234"
-    assert c2["country"] == "US"
-    assert c2["skills"] == [
+    assert c1["skills"] == [
+        "Data Science",
         "Gen Ai",
         "Generative Ai",
         "Machine Learning",
@@ -124,7 +115,7 @@ Located in California, USA.
         "SQL",
         "Structured Query Language",
     ]
-    assert c2["experience_yrs"] == 6.0
-    assert c2["name_confidence"] == 0.68
-    assert c2["name_provenance"] == ["CSV:sample.csv#row1"]
+    assert c1["experience_yrs"] == 6.0
+    assert c1["name_confidence"] == 0.67
+    assert c1["name_provenance"] == ["CSV:sample.csv#row1"]
 

@@ -257,8 +257,20 @@ def _extract_name(text: str, source_type: str = "") -> str | None:
             return normalize_name(match.group(1))
 
     if source_type == "Notes" and lines:
-        # Title case the first line and retain it as candidate name
-        return lines[0].strip().title()
+        first_line = lines[0].strip()
+        # If the first line is a candidate introduction like "Candidate goes by Jon."
+        # or has nickname indicator, try to extract the name using the alias pattern
+        alias_match = re.search(
+            r"(?:goes by|preferred name|nickname|aka|also known as)\s*[:\-]?\s*([A-Za-z][A-Za-z'.-]*(?:\s+[A-Za-z][A-Za-z'.-]*){0,2})",
+            first_line,
+            re.IGNORECASE
+        )
+        if alias_match:
+            name_val = re.split(r"[.;,\n]", alias_match.group(1), maxsplit=1)[0].strip()
+            return normalize_name(name_val)
+            
+        if not _looks_like_non_name_line(first_line):
+            return first_line.title()
 
     for line in lines:
         candidate_name = _name_from_line(line)
