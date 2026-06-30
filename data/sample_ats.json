@@ -1,17 +1,18 @@
 {
   "candidates": [
     {
-      "name": "Jon Doe",
-      "email": "john.doe@gmail.com",
-      "phone": "+1 (650) 555-1234",
-      "country": "United States of America",
+      "name": "Jonathan Andrew Doe",
+      "email": "j.doe@gmail.com",
+      "phone": "+16505551234",
+      "country": null,
       "skills": [
         "python",
-        "ml",
-        "Generative AI",
-        "Structured Query Language"
+        "machine learning",
+        "sql",
+        "pytorch",
+        "large language models"
       ],
-      "experience_years": 6
+      "experience_years": 5
     }
   ]
 }
