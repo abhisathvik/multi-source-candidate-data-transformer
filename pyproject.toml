@@ -1,0 +1,17 @@
+[project]
+name = "candidate-transformer"
+version = "0.1.0"
+description = "Multi-source candidate data transformer with canonical merge, confidence, provenance, and configurable projection."
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.7",
+  "pydantic-extra-types>=2.10",
+  "phonenumbers>=8.13",
+  "python-dateutil>=2.9",
+  "pdfminer.six>=20231228",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

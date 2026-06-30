@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {"path": "full_name", "rename": "name"},
+    {"path": "email"},
+    {"path": "phone"},
+    {"path": "country"},
+    {"path": "skills"},
+    {"path": "experience_yrs"}
+  ],
+  "normalization": {
+    "phone": {"format": "E164"},
+    "country": {"format": "alpha2"},
+    "skills": {"canonicalize": true}
+  },
+  "include_confidence": true,
+  "include_provenance": true,
+  "on_missing": "null"
+}

@@ -1,0 +1,17 @@
+{
+  "candidates": [
+    {
+      "name": "Jon Doe",
+      "email": "john.doe@gmail.com",
+      "phone": "+1 (650) 555-1234",
+      "country": "United States of America",
+      "skills": [
+        "python",
+        "ml",
+        "Generative AI",
+        "Structured Query Language"
+      ],
+      "experience_years": 6
+    }
+  ]
+}
